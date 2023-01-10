@@ -1,46 +1,73 @@
-console.log("Hello World!");
+// get user and computer score
+let userScoreText = document.querySelector("#user");
+let userScore = 0;
+// computer score
+let computerScoreText = document.querySelector("#computer");
+let computerScore = 0;
 
 function getComputerChoice() {
     let choices = ['Rock', 'Paper', 'Scissors'];
     let randIndex = Math.floor(Math.random() * 3);
-    console.log(randIndex);
     return choices[randIndex];
 }
 
-console.log(getComputerChoice());
 
 // this function determines which party wins
-function playRound (playerSelection, computerSelection) {
+function playRound (e) {
     // convert the playSelection
-    playerSelection = convertSelection(playerSelection);
+    playerSelection = convertSelection(e.target.id);
+    let computerSelection = getComputerChoice();
     if (playerSelection === computerSelection) {
-        return `It's a tie!`;
+        showResult('It is a tie!');
     } else if ((playerSelection === 'Rock' && computerSelection === 'Scissors') || 
         (playerSelection === 'Scissors' && computerSelection === 'Paper') ||
         (playerSelection === 'Paper' && computerSelection === 'Rock')) {
-            return 'The player won!';
+            showResult('The player won!');
+            userScore += 1;
         } else {
-            return 'The computer won!';
+            showResult('The computer won!');
+            computerScore += 1;
         }
+    updateScore();
 
 }
 
-// test whether the playRound fucntion works
-// const playerSelection = "rock";
-// const computerSelection = getComputerChoice();
-// console.log(playRound(playerSelection, computerSelection));
+// get the buttons
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener("click", playRound))
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Please put in your paper/rock/scissors choice: ");
-        let computerSelection = getComputerChoice();
-        let result = playRound(playerSelection, computerSelection);
-        console.log(playerSelection + ' ' + computerSelection);
-        console.log(result);
+// get the result section
+const result = document.querySelector('.result');
+
+// create DOM UI manipulation to show the result for rounds
+function showResult(display) {
+    const testText = document.createElement('p');
+    testText.textContent = display;
+    result.appendChild(testText);
+}
+
+// this function shows the score
+function updateScore() {
+    userScoreText.textContent = userScore.toString();
+    computerScoreText.textContent = computerScore.toString();
+    let winner;
+    if (userScore === 5) {
+        winner = 'User has won!!!';
+        callWinner(winner);
+    } else if (computerScore === 5) {
+        winner = 'The computer has won!!!';
+        callWinner(winner);
     }
+    
 }
 
-game();
+function callWinner(winner) {
+    const callWinner = document.createElement('h2');
+    callWinner.style.color = 'blue';
+    callWinner.textContent = winner;
+    result.appendChild(callWinner);
+}
+
 // convert the selection
 function convertSelection (playerSelection) {
     return playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase();
