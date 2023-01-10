@@ -66,6 +66,17 @@ function callWinner(winner) {
     callWinner.style.color = 'blue';
     callWinner.textContent = winner;
     result.appendChild(callWinner);
+    displayButtons();
+}
+
+// first disable choice buttons then use display a button to reset everyting
+function displayButtons() {
+    // disable the buttons
+    buttons.forEach(button => button.disabled = true);
+    const restartBtn = document.createElement('button');
+    restartBtn.textContent = "Try again";
+    document.body.append(restartBtn);
+    restartBtn.addEventListener('click', () => location.reload());
 }
 
 // convert the selection
