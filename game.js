@@ -43,6 +43,7 @@ const result = document.querySelector('.result');
 function showResult(display) {
     const testText = document.createElement('p');
     testText.textContent = display;
+    testText.style.margin = "6px";
     result.appendChild(testText);
 }
 
@@ -75,6 +76,8 @@ function displayButtons() {
     buttons.forEach(button => button.disabled = true);
     const restartBtn = document.createElement('button');
     restartBtn.textContent = "Try again";
+    restartBtn.style.alignSelf = "center";
+    restartBtn.style.marginBottom = "10px";
     document.body.append(restartBtn);
     restartBtn.addEventListener('click', () => location.reload());
 }

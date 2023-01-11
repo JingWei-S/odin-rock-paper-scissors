@@ -21,7 +21,7 @@ button {
     color: #f9faf8;
     border: none;
     border-radius: 8px;
-    padding: 8px 20px;
+    padding: 12px 20px;
     font-size: 18px;
     font-weight: bold;
     width: 12em;
@@ -34,3 +34,26 @@ button {
     gap: 12px;
 }
 
+.score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+h3 {
+    width: 24em;
+    text-align: center;
+}
+
+.result {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 400px;
+}
